@@ -10,6 +10,8 @@ finish-args:
   - --device=dri
   - --socket=pulseaudio
   - --share=network
+  - --filesystem=home
+# it needs home permission because the save funtionality doesn't use portals It saves files alongside other saved files.
 
 
 modules:
