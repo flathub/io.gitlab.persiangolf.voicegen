@@ -52,7 +52,7 @@ modules:
       - --enable-libopus
       - --enable-libvorbis
       - --enable-libvpx
-      - --enable-avresample
+#      - --enable-avresample
       - --disable-libx264
     cleanup:
       - /share/ffmpeg
