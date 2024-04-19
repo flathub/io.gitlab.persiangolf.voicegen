@@ -1,6 +1,6 @@
 app-id: io.gitlab.persiangolf.voicegen
 runtime: org.kde.Platform
-runtime-version: '5.15-21.08'
+runtime-version: '5.15-23.08'
 sdk: org.kde.Sdk
 command: voicegen
 finish-args:
@@ -58,8 +58,8 @@ modules:
       - /share/ffmpeg
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-4.2.4.tar.xz
-        sha256: 0d5da81feba073ee78e0f18e0966bcaf91464ae75e18e9a0135186249e3d2a0b
+        url: https://www.ffmpeg.org/releases/ffmpeg-6.0.1.tar.xz
+        sha256: 9b16b8731d78e596b4be0d720428ca42df642bb2d78342881ff7f5bc29fc9623
 
 
 
@@ -68,7 +68,7 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/PersianGolf/voicegen.git
-        tag: "2.0.0"
+        tag: "2.1.0"
     post-install:
       - install -Dm666 Integration-Stuff/desktop/voicegen.desktop /app/share/applications/io.gitlab.persiangolf.voicegen.desktop
       - install -Dm666 Integration-Stuff/icons/32x32/voicegen.png /app/share/icons/hicolor/32x32/apps/io.gitlab.persiangolf.voicegen.png
