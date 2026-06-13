@@ -1,0 +1,63 @@
+From 26765cb56e1878ee8eb537cd410289790a3d77a5 Mon Sep 17 00:00:00 2001
+From: Sabri Ünal <yakushabb@gmail.com>
+Date: Sat, 13 Jun 2026 18:24:48 +0300
+Subject: [PATCH] Fix appdata paper cut
+
+Signed-off-by: Sabri Ünal <yakushabb@gmail.com>
+---
+ Integration-Stuff/appdata/io.gitlab.persiangolf.voicegen.appdata.xml | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/Integration-Stuff/appdata/io.gitlab.persiangolf.voicegen.appdata.xml b/Integration-Stuff/appdata/io.gitlab.persiangolf.voicegen.appdata.xml
+index a405203..90a0457 100644
+--- a/Integration-Stuff/appdata/io.gitlab.persiangolf.voicegen.appdata.xml
++++ b/Integration-Stuff/appdata/io.gitlab.persiangolf.voicegen.appdata.xml
+@@ -10,7 +10,8 @@
+ 
+   <description>
+     <p>
+-      VoiceGen is a simple piece of software for reading your texts. It can give you a limited access to Streamlabs (amazon polly) voices, also it provides an interface followed by an enhancer for svox pico text to speech engine.
++      VoiceGen is a simple piece of software for reading your texts. It can give you a limited access to
++      Streamlabs (amazon polly) voices, also it provides an interface followed by an enhancer for svox pico text to speech engine.
+     </p>
+     <p>
+       It can be used as a text reader or a narrator for your project/video.
+@@ -29,9 +30,12 @@
+     </p>
+   </description>
+   <url type="homepage">https://gitlab.com/PersianGolf/voicegen</url>
+-  <url type="bugtracker">https://gitlab.com/PersianGolf/voicegen/-/issues</url>
++  <url type="bugtracker">https://gitlab.com/PersianGolf/voicegen/-/work_items</url>
++  <url type="vcs-browser">https://gitlab.com/PersianGolf/voicegen</url>
+   <url type="donation">https://gitlab.com/PersianGolf/voicegen#buy-me-a-coffee-</url>
+-  <developer_name>PersianGolf</developer_name>
++  <developer id="io.gitlab.persiangolf">
++    <name>PersianGolf</name>
++  </developer>
+   <launchable type="desktop-id">io.gitlab.persiangolf.voicegen.desktop</launchable>
+   <releases>
+       <release version="3.0.0" date="2025-10-17">
+@@ -97,16 +101,16 @@
+         </description>
+       </release>
+   </releases>
+-    <content_rating type="oars-1.0" />
++    <content_rating type="oars-1.1" />
+   <screenshots>
+     <screenshot type="default">
+-      <image>https://s6.uupload.ir/files/1_w6zm.png</image>
++      <image>https://imgproxy.flathub.org/insecure/dpr:2/f:avif/rs:fill-down/aHR0cHM6Ly9kbC5mbGF0aHViLm9yZy9tZWRpYS9pby9naXRsYWIvcGVyc2lhbmdvbGYudm9pY2VnZW4vYTE3NTQ3NzlmM2JlOTUxZjU4YmE0MDVjMWU0M2Q5NDAvc2NyZWVuc2hvdHMvaW1hZ2UtMV9vcmlnLnBuZw</image>
+     </screenshot>
+     <screenshot>
+-      <image>https://s6.uupload.ir/files/2_l0i8.png</image>
++      <image>https://imgproxy.flathub.org/insecure/dpr:2/f:avif/rs:fill-down/aHR0cHM6Ly9kbC5mbGF0aHViLm9yZy9tZWRpYS9pby9naXRsYWIvcGVyc2lhbmdvbGYudm9pY2VnZW4vYTE3NTQ3NzlmM2JlOTUxZjU4YmE0MDVjMWU0M2Q5NDAvc2NyZWVuc2hvdHMvaW1hZ2UtMl9vcmlnLnBuZw</image>
+     </screenshot>
+     <screenshot>
+-      <image>https://s6.uupload.ir/files/3_8vmc.png</image>
++      <image>https://imgproxy.flathub.org/insecure/dpr:2/f:avif/rs:fill-down/aHR0cHM6Ly9kbC5mbGF0aHViLm9yZy9tZWRpYS9pby9naXRsYWIvcGVyc2lhbmdvbGYudm9pY2VnZW4vYTE3NTQ3NzlmM2JlOTUxZjU4YmE0MDVjMWU0M2Q5NDAvc2NyZWVuc2hvdHMvaW1hZ2UtM19vcmlnLnBuZw</image>
+     </screenshot>
+   </screenshots>
+ </component>
+--
+libgit2 1.7.2
+

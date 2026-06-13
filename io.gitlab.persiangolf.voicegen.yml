@@ -1,8 +1,10 @@
 app-id: io.gitlab.persiangolf.voicegen
 runtime: org.kde.Platform
-runtime-version: '6.8'
+runtime-version: '6.10'
 sdk: org.kde.Sdk
 command: voicegen
+rename-icon: voicegen
+rename-desktop-file: voicegen.desktop
 finish-args:
   - --share=ipc
   - --socket=fallback-x11
@@ -10,18 +12,21 @@ finish-args:
   - --device=dri
   - --socket=pulseaudio
   - --share=network
-  - --filesystem=home
 # it needs home permission because the save funtionality doesn't use portals It saves files alongside other saved files.
-
-
+  - --filesystem=home
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/man
+  - '*.la'
+  - '*.a'
 modules:
   #popt is a dependancy for svox pico
   - name: popt
     sources:
       - type: archive
-        url: "http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz"
+        url: http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz
         sha256: 5159bc03a20b28ce363aa96765f37df99ea4d8850b1ece17d1e6ad5c24fdc5d1
-
 
   - name: nanotts-wrapper
     buildsystem: simple
@@ -30,52 +35,27 @@ modules:
       - echo -e '#!/bin/sh \n/app/bin/nanotts-real/nanotts -l /app/share/pico/lang "$@"' > nanotts
       - install -Dm755 nanotts /app/bin/nanotts
 
-
   - name: nano-tts
     buildsystem: simple
-    sources:
-    - type: git
-      url: https://github.com/gmn/nanotts
-      commit: d8b91f3d9d524c30f6fe8098ea7a0a638c889cf9
     build-commands:
       - make CFLAGS='-Wno-error=incompatible-pointer-types'
       - install -Dm755 nanotts /app/bin/nanotts-real/nanotts
       - mkdir -p /app/share/pico/
       - cp -r lang /app/share/pico/
-
-
-  - name: ffmpeg
-    config-opts:
-      - --enable-gpl
-      - --enable-libfontconfig
-      - --enable-libfreetype
-      - --enable-libopus
-      - --enable-libvorbis
-      - --enable-libvpx
-#      - --enable-avresample
-      - --disable-libx264
-    cleanup:
-      - /share/ffmpeg
     sources:
-      - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-6.0.1.tar.xz
-        sha256: 9b16b8731d78e596b4be0d720428ca42df642bb2d78342881ff7f5bc29fc9623
-
-
+      - type: git
+        url: https://github.com/gmn/nanotts
+        commit: d8b91f3d9d524c30f6fe8098ea7a0a638c889cf9
 
   - name: voicegen
     buildsystem: cmake-ninja
+    post-install:
+      - install -Dm666 Integration-Stuff/desktop/voicegen.desktop -t /app/share/applications/
+      - install -Dm666 Integration-Stuff/icons/scalable/voicegen.svg -t /app/share/icons/hicolor/scalable/apps/
+      - install -Dm666 Integration-Stuff/appdata/${FLATPAK_ID}.appdata.xml -t /app/share/metainfo/
     sources:
       - type: git
         url: https://gitlab.com/PersianGolf/voicegen.git
-        commit: "43c3a99eb8b6184d3825087541450ec601426a4a"
-    post-install:
-      - install -Dm666 Integration-Stuff/desktop/voicegen.desktop /app/share/applications/io.gitlab.persiangolf.voicegen.desktop
-      - install -Dm666 Integration-Stuff/icons/32x32/voicegen.png /app/share/icons/hicolor/32x32/apps/io.gitlab.persiangolf.voicegen.png
-      - install -Dm666 Integration-Stuff/icons/48x48/voicegen.png /app/share/icons/hicolor/48x48/apps/io.gitlab.persiangolf.voicegen.png
-      - install -Dm666 Integration-Stuff/icons/64x64/voicegen.png /app/share/icons/hicolor/64x64/apps/io.gitlab.persiangolf.voicegen.png
-      - install -Dm666 Integration-Stuff/icons/128x128/voicegen.png /app/share/icons/hicolor/128x128/apps/io.gitlab.persiangolf.voicegen.png
-      - install -Dm666 Integration-Stuff/icons/256x256/voicegen.png /app/share/icons/hicolor/256x256/apps/io.gitlab.persiangolf.voicegen.png
-      - install -Dm666 Integration-Stuff/icons/512x512/voicegen.png /app/share/icons/hicolor/512x512/apps/io.gitlab.persiangolf.voicegen.png
-      - install -Dm666 Integration-Stuff/icons/scalable/voicegen.svg /app/share/icons/hicolor/scalable/apps/io.gitlab.persiangolf.voicegen.svg
-      - install -Dm666 Integration-Stuff/appdata/io.gitlab.persiangolf.voicegen.appdata.xml /app/share/metainfo/io.gitlab.persiangolf.voicegen.appdata.xml
+        commit: 43c3a99eb8b6184d3825087541450ec601426a4a
+      - type: patch
+        path: fix-appdata.patch
